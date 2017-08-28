@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		/*
+			变量的解构
+			解构等号右边必须是可遍历解构（Iterator）不然会报错
+
+		*/
+		document.addEventListener('DOMContentLoaded',function(){
+			console.log('变量的解构');
+			//1· 数组的解构
+
+		
+			let [a,b,c] = [1,2,3]; //a=1,b=2,c=3
+
+			let [aa, ...bb] = [1,2,3,4];
+			//console.log(aa,bb)
+
+			let cc = []; //解构不成功 返回cc=undefined
+
+			//Generator的解构
+
+			//解构允许有默认值
+			let [foo = 'aaa'] = []; //foo = 'aaa';
+
+			let [fo = 'aaa'] = [1]; //fo = 1; 除非解构为undefined 否则默认值不会生效
+
+			//2·对象的解构
+
+
+			//let {mm, nn} = {mm:'123', nn:'12'}; //mm nn在解构中不是变量而是寻找对应的变量和值
+
+			let {mm:ll, nn:vv} = {mm:'123',nn:'12'}; //上式的拓展
+			console.log(ll,vv);
+			//console.log(mm,nn); //报错
+
+			let node = {
+				npm : {
+					start : {
+						hl : 1
+					}
+				}
+			};
+			
+			let {npm , npm :{start} , npm:{start:{hl}}} = node;
+			console.log(npm, start, hl); // 三次解构
+
+			//解构的使用 
+
+			//1 JSON数据的提取
+			let jsonData = {
+				id : 12,
+				state : 'ok',
+				data : [12,123]
+			}
+			let {id, state, data : number} = jsonData;
+			console.log(id,state,number)
+
+			//2 设置函数参数的默认值
+
+			jQuery.ajax =function(url, {
+				async = true,
+				beforeSend =function () {},
+				cache = true,
+				complete =function(){},
+				crossDomain = false,
+				global = true
+			}){
+
+			}
+
+			//Map结构遍历
+
+			var map = new Map();
+			map.set('first','hello');
+			map.set('second','world');
+
+			for(let [key,value] of map){
+				console.log(key + ' is ' + value);
+			}
+
+			//输入模块的指定方法
+
+			const {SourceMapConsumer} = require('');
+
+			function sum(...cc){
+				console.log(cc);
+			}
+			//sum(1,2,3)
+		})
+	</script>
+</body>
+</html>
